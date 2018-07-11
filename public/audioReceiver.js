@@ -10,13 +10,13 @@ function receiveData () {
 
     if (navigator.getUserMedia) {
 
-        navigator.mediaDevices.getUserMedia({audio:true}, 
-            function(stream) {
-                startRecieving(stream);
-            },
-            function(e) {
-                alert('Error capturing audio.');
-            });
+        navigator.mediaDevices.getUserMedia({audio:true}).
+        then(function(stream) {
+            startRecieving(stream);
+        })
+        .catch(function(err) {
+            alert('Error capturing audio.');
+        });
 
     } else { 
         alert('getUserMedia not supported in this browser.'); 
@@ -34,7 +34,7 @@ function receiveData () {
             }
         }
         var inputValue = Math.floor((maxFrequency - 200)/2);
-        
+        console.log(inputValue);
         switch (inputValue) {
             case 258:
                 if (active) {
