@@ -10,7 +10,7 @@ function receiveData () {
 
     if (navigator.getUserMedia) {
 
-        navigator.getUserMedia({audio:true}, 
+        navigator.mediaDevices.getUserMedia({audio:true}, 
             function(stream) {
                 startRecieving(stream);
             },

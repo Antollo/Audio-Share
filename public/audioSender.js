@@ -22,6 +22,9 @@ function playData (data) {
             level.removeEventListener('mousedown', updateLevel);
             level.removeEventListener('mouseup', updateLevel);
             level.removeEventListener('mousemove', updateLevel);
+            level.removeEventListener('touchstart', updateLevel);
+            level.removeEventListener('touchend', updateLevel);
+            level.removeEventListener('touchmove', updateLevel);
         }
     }
 
@@ -34,6 +37,9 @@ function playData (data) {
     level.addEventListener('mousedown', updateLevel);
     level.addEventListener('mouseup', updateLevel);
     level.addEventListener('mousemove', updateLevel);
+    level.addEventListener('touchstart', updateLevel);
+    level.addEventListener('touchend', updateLevel);
+    level.addEventListener('touchmove', updateLevel);
 
     oscillator.type = 'square';
     oscillator.start();
