@@ -1,7 +1,5 @@
 var express = require('express');
-var sslRedirect = require('heroku-ssl-redirect');
 var app = express();
-app.use(sslRedirect);
 var http = require('http').Server(app);
 
 app.use(express.static(__dirname + '/public'));
