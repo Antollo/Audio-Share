@@ -8,7 +8,7 @@ function receiveData () {
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
     navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
-    if (navigator.mediaDevices.getUserMedia) {
+    if (navigator.getUserMedia) {
 
         navigator.mediaDevices.getUserMedia({audio:true}).
         then(function(stream) {
