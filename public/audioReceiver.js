@@ -8,7 +8,7 @@ function receiveData () {
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
     navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
-    if (navigator.getUserMedia) {
+    if (navigator.mediaDevices.getUserMedia) {
 
         navigator.mediaDevices.getUserMedia({audio:true}).
         then(function(stream) {
@@ -19,6 +19,14 @@ function receiveData () {
             startRecieving(stream);
         })
         .catch(function(err) {
+            navigator.getUserMedia({audio:true}, function (stream) {
+                document.getElementById('snackbar').MaterialSnackbar.showSnackbar({
+                    message: 'Receiving files will start automatically.',
+                    timeout: 4000
+                });
+                startRecieving(stream);
+            })
+            }, function (err) {});
             alert('Cannot receive files, microphone not available.');
             document.getElementById('snackbar').MaterialSnackbar.showSnackbar({
                 message: 'But you still can send files. To make receiving files possible I advise you to use Firefox.',
