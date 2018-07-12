@@ -8,18 +8,34 @@ function receiveData () {
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
     navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
-    if (navigator.getUserMedia) {
+    if (navigator.mediaDevices.getUserMedia) {
 
         navigator.mediaDevices.getUserMedia({audio:true}).
         then(function(stream) {
+            document.getElementById('snackbar').MaterialSnackbar.showSnackbar({
+                message: 'Receiving files will start automatically.',
+                timeout: 4000
+            });
             startRecieving(stream);
         })
         .catch(function(err) {
-            alert('Error capturing audio.');
+            alert('Cannot receive files, microphone not available.');
+            document.getElementById('snackbar').MaterialSnackbar.showSnackbar({
+                message: 'But you still can send files. To make receiving files possible I advise you to use Firefox.',
+                timeout: 6000,
+                actionHandler: function () {location.href = 'www.mozilla.org/firefox'},
+                actionText: 'Download Firefox'
+            });
         });
 
     } else { 
-        alert('getUserMedia not supported in this browser.'); 
+        alert('Cannot receive files, microphone not available.');
+        document.getElementById('snackbar').MaterialSnackbar.showSnackbar({
+            message: 'But you still can send files. To make receiving files possible I advise you to use Firefox.',
+            timeout: 6000,
+            actionHandler: function () {location.href = 'www.mozilla.org/firefox'},
+            actionText: 'Download Firefox'
+        });
     }
 
     function processData(frequencyArray) {
@@ -46,6 +62,10 @@ function receiveData () {
                 break;
             case 260:
                 if (!active) {
+                    document.getElementById('snackbar').MaterialSnackbar.showSnackbar({
+                        message: 'Receiving file started.',
+                        timeout: 4000
+                    });
                     active = true;
                     receivedArray = new Array();
                     receivedArray.push(new Counter(260));
@@ -53,6 +73,10 @@ function receiveData () {
                 break;
             case 264:
                 if (active) {
+                    document.getElementById('snackbar').MaterialSnackbar.showSnackbar({
+                        message: 'Receiving file ended.',
+                        timeout: 4000
+                    });
                     active = false;
                     receivedArray.push(new Counter(264));
                     console.log(receivedArray);

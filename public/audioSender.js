@@ -16,6 +16,10 @@ function playData (data) {
             i++;
             window.setTimeout(playSingleNumber, 700);
         } else {
+            document.getElementById('snackbar').MaterialSnackbar.showSnackbar({
+                message: 'Sending file ended.',
+                timeout: 4000
+            });
             oscillator.stop();
             sendingCard.style.display = 'none';
             volumeCard.style.display = 'none';
@@ -46,5 +50,11 @@ function playData (data) {
     oscillator.connect(amplifier);
     amplifier.gain.value = 0.7;
     amplifier.connect(audioContext.destination);
+
+    document.getElementById('snackbar').MaterialSnackbar.showSnackbar({
+        message: 'Sending file started.',
+        timeout: 4000
+    });
+
     playSingleNumber();
 }
