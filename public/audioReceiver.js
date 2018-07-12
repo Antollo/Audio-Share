@@ -25,7 +25,6 @@ function receiveData () {
                     timeout: 4000
                 });
                 startRecieving(stream);
-            })
             }, function (err) {});
             alert('Cannot receive files, microphone not available.');
             document.getElementById('snackbar').MaterialSnackbar.showSnackbar({
